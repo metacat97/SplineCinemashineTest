@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ttang
+  - Bullet
+  - Bus
+  - BusStop
   layers:
   - Default
   - TransparentFX

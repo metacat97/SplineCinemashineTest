@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CallBus : MonoBehaviour
 {
     public Button hochulBtn;
+    public Button closeBtn;
     public GameObject dochackjiPanel;
 
     TestSpline test = new TestSpline();
@@ -13,6 +14,7 @@ public class CallBus : MonoBehaviour
     public void Start()
     {
         dochackjiPanel.SetActive(false);
+        closeBtn.gameObject.SetActive(false);
         hochulBtn.interactable = false;
     }
     private void OnTriggerStay(Collider other)
@@ -28,20 +30,24 @@ public class CallBus : MonoBehaviour
         {
             hochulBtn.interactable = false;
         }
+        if(dochackjiPanel.activeSelf == true)
+        {
+            ClickCloseBtn();
+        }
     }
 
     public void ClickBtn()
     {
         hochulBtn.gameObject.SetActive(false);
         dochackjiPanel.SetActive(true);
+        closeBtn.gameObject.SetActive(true);
     }
 
-    public Vector3 GoFirstPlace(Vector3 arrivePlace)
+    public void ClickCloseBtn()
     {
-        return arrivePlace;
+        closeBtn.gameObject.SetActive(false);
+        dochackjiPanel.SetActive(false);
+        hochulBtn.gameObject.SetActive(true);
     }
-
-
-    
 
 }

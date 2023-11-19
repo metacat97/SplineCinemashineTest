@@ -13,8 +13,8 @@ public class TestSpline : MonoBehaviour
     
     Vector3 savePosition = default;
     public GameObject subwayPointPrefab;
-    public List <Vector3> savePositionList = new List<Vector3> ();
-
+    //public List <Vector3> savePositionList = new List<Vector3> ();
+    public List<Vector3> savePositionList { get; private set; } = new List<Vector3>();
     private void Awake()
     {
         TestSplinePath();
