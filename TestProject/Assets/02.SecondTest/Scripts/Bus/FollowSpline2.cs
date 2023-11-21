@@ -32,7 +32,7 @@ public class FollowSpline2 : MonoBehaviour
         splineLength = mySpline.CalculateLength();
         isOneToZero = false;
         isStop = true;
-        currentPosIdx = stationInfo.stationBtns.Count;
+        //currentPosIdx = stationInfo.stationBtns.Count;
     }
     
     void Update()
@@ -104,9 +104,9 @@ public class FollowSpline2 : MonoBehaviour
         {
             int currentIndex = i;
             stationInfo.stationBtns[i].onClick.AddListener(() => GoBus());
-            Debug.LogFormat("{0} i 전에 ", i);
+           
             stationInfo.stationBtns[i].onClick.AddListener(() => GoStation(currentIndex));
-            Debug.Log(i);
+        
         }
     }
     //}버튼에 이벤트 추가
@@ -116,7 +116,6 @@ public class FollowSpline2 : MonoBehaviour
     {
         if (other.tag == "BusStop")
         {
-            Debug.LogFormat("이게 트리거고 포지션 값{0}", other.transform.position);
             CheckStopPoint(stopStationPos, other.transform.position);
         }
         if (other.tag == "LoadableItem")
@@ -159,7 +158,7 @@ public class FollowSpline2 : MonoBehaviour
 
         stopStationPos = stationInfo.savePositionList[goalPositionIdx];
 
-        if (currentPosIdx > goalPositionIdx )
+        if (currentPosIdx > goalPositionIdx)
         {
             isOneToZero = true;
         }
@@ -169,29 +168,55 @@ public class FollowSpline2 : MonoBehaviour
             isStop = true;
             return;
         }
-        else 
+        else
         {
             stationInfo.CloseBusCanvas();
             isOneToZero = false;
         }
-        currentPosIdx = goalPositionIdx;
         CheckDirection(currentPosIdx, goalPositionIdx);
+        currentPosIdx = goalPositionIdx;
     }
     //} 플레이어 조작 출발
 
     private void CheckDirection(int nowIdx, int destinationIdx)
     {
         //CheckDirection(currentPosIdx, goalPositionIdx); 사용예
-        int forwardD = destinationIdx - nowIdx;
-        int reverseD = (stationInfo.stationBtns.Count - destinationIdx) + nowIdx;
-        if (forwardD < reverseD)
+        
+        int forwardD;
+        int reverseD;
+        Debug.LogFormat("현재{0}",nowIdx);
+        Debug.LogFormat("목적지{0}",destinationIdx);
+        if (nowIdx > destinationIdx)
         {
-            isOneToZero = true;
+            forwardD = nowIdx - destinationIdx; //6
+            reverseD = (stationInfo.stationBtns.Count - nowIdx) +  destinationIdx; //2
+                Debug.Log("여긴 들어옴?");
+            if (forwardD > reverseD)
+            {
+
+                isOneToZero = false;
+            }
+            else
+            {
+                isOneToZero = true;
+            }
         }
         else
         {
-            isOneToZero = false;
+            forwardD = destinationIdx - nowIdx; //6
+            reverseD = (stationInfo.stationBtns.Count - destinationIdx) + nowIdx;
+            if (forwardD > reverseD)
+            {
+                Debug.Log("여기 들어옴?");
+                isOneToZero = true;
+            }
+            else
+            {
+                isOneToZero = false;
+            }
         }
+        
+
     }
 
     //나중에 아이템 추가

@@ -28,10 +28,7 @@ public class StationManager : MonoBehaviour
         {
             savePositionList.Add(station.gameObject.transform.position);
         }
-        foreach (var stationPos in savePositionList)
-        {
-            Debug.Log(stationPos);
-        }
+        
     }
     public void OpenBusCanvas()
     {
