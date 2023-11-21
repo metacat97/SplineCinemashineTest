@@ -92,29 +92,31 @@ public class FollowSpline : MonoBehaviour
             GoBus();
         }
     }
-    public void GoFirstStation()
+    public void GoFirstStation(int goalPosition)
     {
         Debug.Log("1번 누름");
-        stopStationPos = testSplineScript.savePositionList[0];
+        //stopStationPos = goalPosition;
+        //stopStationPos = testSplineScript.savePositionList[0];
+        stopStationPos = testSplineScript.savePositionList[goalPosition];
     }
-    public void GoSecondStation() 
-    {
-        Debug.Log("2번 누름");
-        stopStationPos = testSplineScript.savePositionList[1];
-    }
-    public void GoThirdStation()
-    {
-        Debug.Log("3번 누름");
-        stopStationPos = testSplineScript.savePositionList[2];
-    }
-    public void GoFourthStation() 
-    {
-        Debug.Log("4번 누름");
-        stopStationPos = testSplineScript.savePositionList[3];
-    }
-    public void GoFifthStation() 
-    {
-        Debug.Log("5번 누름");
-        stopStationPos = testSplineScript.savePositionList[4];
-    }
+    //public void GoSecondStation() 
+    //{
+    //    Debug.Log("2번 누름");
+    //    stopStationPos = testSplineScript.savePositionList[1];
+    //}
+    //public void GoThirdStation()
+    //{
+    //    Debug.Log("3번 누름");
+    //    stopStationPos = testSplineScript.savePositionList[2];
+    //}
+    //public void GoFourthStation() 
+    //{
+    //    Debug.Log("4번 누름");
+    //    stopStationPos = testSplineScript.savePositionList[3];
+    //}
+    //public void GoFifthStation() 
+    //{
+    //    Debug.Log("5번 누름");
+    //    stopStationPos = testSplineScript.savePositionList[4];
+    //}
 }
