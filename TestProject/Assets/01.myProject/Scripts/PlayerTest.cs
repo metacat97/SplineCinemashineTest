@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 public class PlayerTest : MonoBehaviour
@@ -34,8 +32,9 @@ public class PlayerTest : MonoBehaviour
     }
     private void Run()
     {
-        Vector3 nextVec = new Vector3(inputVec.x * speed,0f,inputVec.y * speed);
-        myRigid.velocity = transform.TransformDirection(nextVec);
+        Vector3 nextVec = new Vector3(inputVec.x,0f,inputVec.y).normalized;
+        //myRigid.velocity = transform.TransformDirection(nextVec);
+        transform.position += nextVec * speed * Time.deltaTime;
     }
     void OnMove(InputValue value)
     {
@@ -48,11 +47,12 @@ public class PlayerTest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             myRigid.velocity = Vector3.zero;
-            myRigid.AddForce(Vector3.up * 100f,ForceMode.Impulse);
+            myRigid.AddForce(Vector3.up * 5f,ForceMode.Impulse);
         }
         else
         {
-            myRigid.AddForce(Vector3.down,ForceMode.Impulse);
+            myRigid.AddForce(Vector3.down,ForceMode.
+                Force);
         }
     }
 }
