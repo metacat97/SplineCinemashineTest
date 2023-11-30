@@ -24,12 +24,12 @@ public class InteractButton : MonoBehaviour
     {
         if (isOnPanel)
         {
-            interactPanel.gameObject.SetActive(true);
+            interactPanel.SetActive(true);
         }
         else
         {
             Debug.Log("µé¾î¿È?");
-            interactPanel.gameObject.SetActive(false);
+            interactPanel.SetActive(false);
         }
     }
 

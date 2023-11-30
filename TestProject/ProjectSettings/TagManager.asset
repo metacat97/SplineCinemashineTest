@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Bus
   - BusStop
+  - Npc
   layers:
   - Default
   - TransparentFX

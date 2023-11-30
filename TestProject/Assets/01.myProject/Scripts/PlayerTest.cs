@@ -15,8 +15,7 @@ public class PlayerTest : MonoBehaviour
     {
         myRigid = GetComponent<Rigidbody>();    
     }
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         speed = 10;
     }
@@ -25,14 +24,57 @@ public class PlayerTest : MonoBehaviour
     {
         Run();
     }
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         Jump();        
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Npc"))
+        {
+            IInteractableNpc npc = other.GetComponent<IInteractableNpc>();
+            InteractButton interactButton = other.gameObject.GetComponent<InteractButton>();
+            interactButton.SetText(npc.npcName);
+            interactButton.isOnPanel = true;
+            interactButton.ControlInteractPanel();
+        }
+    }
+
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Npc"))
+        {
+            IInteractableNpc npc = other.GetComponent<IInteractableNpc>();
+            InteractButton interactButton = other.gameObject.GetComponent<InteractButton>();
+            interactButton.ControlInteractPanel();
+            if (npc != null) 
+            {
+                npc.InteractNpc();
+                if(Input.GetKeyDown(KeyCode.F))
+                {
+                    npc.PushButton();
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Npc"))
+        {
+            InteractButton interactButton = other.gameObject.GetComponent<InteractButton>();
+        interactButton.isOnPanel = false;
+        interactButton.ControlInteractPanel();
+        }
+    }
+
     private void Run()
     {
+        
         Vector3 nextVec = new Vector3(inputVec.x,0f,inputVec.y).normalized;
+        
         //myRigid.velocity = transform.TransformDirection(nextVec);
         transform.position += nextVec * speed * Time.deltaTime;
     }
@@ -41,8 +83,7 @@ public class PlayerTest : MonoBehaviour
         Debug.Log(value.Get<Vector2>());
         inputVec = value.Get<Vector2>();
     }
-
-    void Jump() 
+    private void Jump() 
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -51,8 +92,8 @@ public class PlayerTest : MonoBehaviour
         }
         else
         {
-            myRigid.AddForce(Vector3.down,ForceMode.
-                Force);
+            myRigid.AddForce(Vector3.down,ForceMode.Force);
         }
     }
+
 }
