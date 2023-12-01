@@ -6,6 +6,9 @@ public class NpcJamy : MonoBehaviour, IInteractableNpc
 {
     public GameObject dialog1;
     public GameObject dialog2;
+
+    public DialogueUI myDialogue;
+    public DialogueObject textDialogue;
     public string npcName 
     {
         get 
@@ -40,6 +43,11 @@ public class NpcJamy : MonoBehaviour, IInteractableNpc
     //        interactButton.ControlInteractPanel();
     //    }
     //}
+
+    private void Awake()
+    {
+        myDialogue = GetComponent<DialogueUI>();
+    }
     public void Start()
     {
         dialog1.gameObject.SetActive(false);
@@ -57,7 +65,7 @@ public class NpcJamy : MonoBehaviour, IInteractableNpc
         //dialog1.gameObject.SetActive(true);
         //dialog2.gameObject.SetActive(true);
         //StartCoroutine(DialogueManager.instance.StartDialoge());
-
+        myDialogue.ShowDialogue(textDialogue);
 
     }
     

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ee70e048c5b4341903ac8dd6e7e4d8, type: 3}
+  m_Name: Dialogue01
+  m_EditorClassIdentifier: 
+  dialogue:
+  - "\uC608\uC2DC \uC5F0\uC2B5\t"
+  - "\uC608\uC2DC \uC5F0\uC2B5 2"
+  responses:
+  - responseText: Yes
+    dialogueObject: {fileID: 11400000, guid: fea940d89d2b6c6468a26cda94d09221, type: 2}
+  - responseText: No
+    dialogueObject: {fileID: 11400000, guid: 0686a8982ea7ff34bb52e094cfb3bde8, type: 2}
