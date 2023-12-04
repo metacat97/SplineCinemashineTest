@@ -7,6 +7,7 @@ public class NpcJamy : MonoBehaviour, IInteractableNpc
     public GameObject dialog1;
     public GameObject dialog2;
 
+    private GameObject npcCanvas;
     public DialogueUI myDialogue;
     public DialogueObject textDialogue;
     public string npcName 
@@ -46,13 +47,13 @@ public class NpcJamy : MonoBehaviour, IInteractableNpc
 
     private void Awake()
     {
-        myDialogue = GetComponent<DialogueUI>();
+        npcCanvas =  GameObject.Find("NpcCanvas").gameObject;
+        myDialogue = npcCanvas.GetComponent<DialogueUI>();
     }
     public void Start()
     {
         dialog1.gameObject.SetActive(false);
         dialog2.gameObject.SetActive(false);
-
     }
     public void InteractNpc()
     {

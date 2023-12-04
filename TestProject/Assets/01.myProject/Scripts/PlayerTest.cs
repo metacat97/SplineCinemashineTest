@@ -9,6 +9,9 @@ public class PlayerTest : MonoBehaviour
     public Vector2 inputVec;
     public float speed = 10f;
 
+    private bool isInteract = false;
+    private IInteractableNpc npc = default;
+    private InteractButton interactButton = default;
     Rigidbody myRigid;
 
     private void Awake()
@@ -26,15 +29,17 @@ public class PlayerTest : MonoBehaviour
     }
     private void Update()
     {
-        Jump();        
+        if (isInteract) return;
+        Jump();
+        PlayerInteract();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Npc"))
         {
-            IInteractableNpc npc = other.GetComponent<IInteractableNpc>();
-            InteractButton interactButton = other.gameObject.GetComponent<InteractButton>();
+            npc = other.GetComponent<IInteractableNpc>();
+            interactButton = other.gameObject.GetComponent<InteractButton>();
             interactButton.SetText(npc.npcName);
             interactButton.isOnPanel = true;
             interactButton.ControlInteractPanel();
@@ -42,31 +47,33 @@ public class PlayerTest : MonoBehaviour
     }
 
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Npc"))
-        {
-            IInteractableNpc npc = other.GetComponent<IInteractableNpc>();
-            InteractButton interactButton = other.gameObject.GetComponent<InteractButton>();
-            interactButton.ControlInteractPanel();
-            if (npc != null) 
-            {
-                npc.InteractNpc();
-                if(Input.GetKeyDown(KeyCode.F))
-                {
-                    npc.PushButton();
-                }
-            }
-        }
-    }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    //if (other.CompareTag("Npc"))
+    //    //{
+    //    //    IInteractableNpc npc = other.GetComponent<IInteractableNpc>();
+    //    //    InteractButton interactButton = other.gameObject.GetComponent<InteractButton>();
+    //    //    interactButton.ControlInteractPanel();
+    //    //    if (npc != null) 
+    //    //    {
+    //    //        npc.InteractNpc();
+    //    //        if(Input.GetKeyDown(KeyCode.F))
+    //    //        {
+    //    //            npc.PushButton();
+    //    //        }
+    //    //    }
+    //    //}
+    //}
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Npc"))
         {
-            InteractButton interactButton = other.gameObject.GetComponent<InteractButton>();
-        interactButton.isOnPanel = false;
-        interactButton.ControlInteractPanel();
+            interactButton.isOnPanel = false;
+            interactButton.ControlInteractPanel();
+            npc = null;
+            interactButton = null; 
+            isInteract = false;
         }
     }
 
@@ -96,4 +103,20 @@ public class PlayerTest : MonoBehaviour
         }
     }
 
+    public void PlayerInteract()
+    {
+        if(interactButton != null)
+        {
+            interactButton.ControlInteractPanel();
+        }
+        if (npc != null)
+        {
+            npc.InteractNpc();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                npc.PushButton();
+                isInteract = true;
+            }
+        }
+    }
 }
