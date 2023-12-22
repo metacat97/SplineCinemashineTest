@@ -8,5 +8,9 @@ public interface IInteractableNpc
     {
 
     }
+    public void ChangeNpcState(NpcState _change)
+    {
+
+    }
     
 }

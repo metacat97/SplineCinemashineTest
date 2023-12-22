@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DialogueUI : MonoBehaviour
 {
+    public PlayerTest player;
+    
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private TMP_Text textLabel;
     //[SerializeField] private 
@@ -25,6 +27,7 @@ public class DialogueUI : MonoBehaviour
     public void ShowDialogue(DialogueObject dialogueObject)
     {
         dialogueBox.SetActive(true);
+        Debug.LogFormat("{0}<=== 지금 다이얼로그  오브젝트 이름", dialogueObject.name);
         StartCoroutine(StepThroughDialogue(dialogueObject));    
     }
 
@@ -35,10 +38,13 @@ public class DialogueUI : MonoBehaviour
         //    yield return myTextEffect.Run(dialogue, textLabel);
         //    yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         //}
+        Debug.LogFormat("{0}<=== 지금 코루틴 안에 다이얼로그  오브젝트 이름", dialogueObject.name);
 
         for (int i = 0; i< dialogueObject.Dialogue.Length; i++)
         {
             string dialogue = dialogueObject.Dialogue[i];
+            Debug.LogFormat("{0}<=== 다이얼로그 내용", dialogue);
+
             yield return myTextEffect.Run(dialogue, textLabel);
 
             if (i == dialogueObject.Dialogue.Length - 1 && dialogueObject.HasResponses)//dialogueObject.Responses != null && dialogueObject.Responses.Length > 0)
@@ -46,6 +52,7 @@ public class DialogueUI : MonoBehaviour
                 break;
             }
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+            myTextEffect.fadeObject.SetActive(false);
         }
 
         if (dialogueObject.HasResponses)
@@ -55,6 +62,7 @@ public class DialogueUI : MonoBehaviour
         else
         {
             CloseDialogueBox();
+            player.ChangeDialogueState();
         }
        // CloseDialogueBox();
     }

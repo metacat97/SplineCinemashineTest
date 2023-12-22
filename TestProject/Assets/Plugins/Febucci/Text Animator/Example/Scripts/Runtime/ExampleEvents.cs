@@ -23,6 +23,7 @@ namespace Febucci.UI.Examples
 
         void OnDestroy()
         {
+            Debug.Log("พ๐มฆตส?");
             if(typewriter) typewriter.onMessage.RemoveListener(OnMessage);
         }
 

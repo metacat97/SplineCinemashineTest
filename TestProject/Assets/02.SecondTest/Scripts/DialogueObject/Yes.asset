@@ -14,4 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - I said Yes
-  responses: []
+  - I said Yes
+  - I said Yes
+  - I said Yes
+  responses:
+  - responseText: 
+    dialogueObject: {fileID: 0}

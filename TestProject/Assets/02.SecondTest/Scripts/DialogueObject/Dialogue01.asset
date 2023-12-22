@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Dialogue01
   m_EditorClassIdentifier: 
   dialogue:
-  - "\uC608\uC2DC \uC5F0\uC2B5\t"
-  - "\uC608\uC2DC \uC5F0\uC2B5 2"
-  responses:
-  - responseText: Yes
-    dialogueObject: {fileID: 11400000, guid: fea940d89d2b6c6468a26cda94d09221, type: 2}
-  - responseText: No
-    dialogueObject: {fileID: 11400000, guid: 0686a8982ea7ff34bb52e094cfb3bde8, type: 2}
+  - Test1
+  - Test2
+  - Test3
+  - Test4
+  - Test5
+  responses: []

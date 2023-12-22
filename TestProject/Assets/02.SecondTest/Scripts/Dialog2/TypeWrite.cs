@@ -7,6 +7,7 @@ using UnityEngine;
 public class TypeWrite : MonoBehaviour
 {
     private float textSpeed = 10f;
+    public GameObject fadeObject = default;
 
     public Coroutine Run(string textToType, TMP_Text textLabel)
     {
@@ -26,6 +27,8 @@ public class TypeWrite : MonoBehaviour
             textLabel.text = textToType.Substring(0, charIndex);
             yield return null;
         }
+        yield return new WaitForSeconds(0.2f);
+        fadeObject.SetActive(true);
         textLabel.text = textToType;
     }
 }
